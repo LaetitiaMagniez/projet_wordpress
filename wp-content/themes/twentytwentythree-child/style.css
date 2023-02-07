@@ -1,0 +1,41 @@
+/*
+Theme Name: Twenty Twenty-Three Child
+Theme URI: https://wordpress.org/themes/twentytwentythree-child
+Author: Laëtitia
+Author URI: https://wordpress.org
+Description: Twenty Twenty-Three is designed to take advantage of the new design tools introduced in WordPress 6.1. With a clean, blank base as a starting point, this default theme includes ten diverse style variations created by members of the WordPress community. Whether you want to build a complex or incredibly simple website, you can do it quickly and intuitively through the bundled styles or dive into creation and full customization yourself.
+Requires at least: 6.1
+Tested up to: 6.1
+Requires PHP: 5.6
+Template: twentytwentythree
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+Text Domain: twentytwentythreechild
+Tags: one-column, custom-colors, custom-menu, custom-logo, editor-style, featured-images, full-site-editing, block-patterns, rtl-language-support, sticky-post, threaded-comments, translation-ready, wide-blocks, block-styles, accessibility-ready, blog, portfolio, news
+*/
+
+
+#loading { position:  fixed; width: 100vw; height: 100vh; z-index: 99999; opacity: .75; display: none; top: 0; }
+#loading .col { height: 100vh; }
+#loading .preloader-wrapper { margin: auto; display: block; margin-top: calc(100vh / 2 - 64px / 2); }
+
+@font-face {
+    font-family: 'FontAwesome';
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
+    src: url("./fonts/fa-regular-400.woff2") format("woff2"), url("./fonts/fa-regular-400.ttf") format("truetype"); }
+
+@font-face {
+    font-family: 'FontAwesome';
+    font-style: normal;
+    font-weight: 900;
+    font-display: block;
+    src: url("./fonts/fa-solid-900.woff2") format("woff2"), url("./fonts/fa-solid-900.ttf") format("truetype"); }
+
+@font-face {
+    font-family: 'FontAwesomeBrands';
+    font-display: block;
+    font-weight: 400;
+    src: url("./fonts/fa-brands-400.woff2") format("woff2"), url("./fonts/fa-brands-400.ttf") format("truetype"); }

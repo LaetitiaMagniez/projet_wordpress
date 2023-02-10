@@ -27,8 +27,8 @@ class Lm_Projet_Install {
                 `pays` VARCHAR(255) NOT NULL,
                 `code_ISO` VARCHAR(3) NOT NULL,
                 `note` INT(1) Default 0,
-                `accessible_majeur` INT(1) Default 1,
-                `disponible` INT(1) Default 1,
+                `accessible_majeur_uniquement` INT(1) Default 0,
+                `disponible` INT(1) Default 0,
                 PRIMARY KEY (`id`)
             ) ENGINE=InnoDB '. $charset_collate;
 

@@ -51,12 +51,13 @@ class Lm_Projet_Wp_List extends WP_List_Table
 
 
         $note = '<form action="#">
-                    <label for="cars">Choose a car:</label>
-                        <select name="cars" id="cars" multiple>
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="opel">Opel</option>
-                            <option value="audi">Audi</option>
+                        <select name="cars" id="cars">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
                         </select>
                 </form>         ';
 
@@ -66,12 +67,7 @@ class Lm_Projet_Wp_List extends WP_List_Table
         $columns['code_ISO'] = __('code ISO');
         $columns['note'] = __('note');
         $columns['accessible'] = __('accessible aux majeurs uniquement');
-        $columns['disponible'] = __('disponible');
         return $columns;
-
-
-
-
 
     }
 
@@ -104,7 +100,7 @@ class Lm_Projet_Wp_List extends WP_List_Table
 
         global $wpdb;
 
-        $sql = "SELECT `pays`,`code_ISO`,`disponible` FROM " . $wpdb->prefix . LM_PROJET_BASENAME . '_countries' ;
+        $sql = "SELECT `pays`,`code_ISO` FROM " . $wpdb->prefix . LM_PROJET_BASENAME . '_countries' ;
 
 
         if (!empty($_REQUEST['orderby'])) {
@@ -120,11 +116,45 @@ class Lm_Projet_Wp_List extends WP_List_Table
 
     public function column_default( $item, $column_name ) {
 
-//        if (preg_match('/delete/i',$column_name))
-//            return self::getDelete($item['id']);
+        if (preg_match('/note/i',$column_name))
+            return self::getNote($item);
+
+        if (preg_match('/accessible/i',$column_name))
+            return self::getAccessibilite($item);
 
         return @$item[$column_name];
 
+    }
+
+    private function getNote($id=0) {
+
+        if (!$id)
+            return;
+
+        return  sprintf(
+            '<select data-id="%d" class="note">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>',
+            $id,
+            __('note')
+        );
+    }
+
+    private function getAccessibilite($id=0) {
+
+        if (!$id)
+            return;
+
+        return  sprintf(
+            '<input type="checkbox" data-id="%d" class="accessible">',
+            $id,
+            __('accessible')
+        );
     }
 
 

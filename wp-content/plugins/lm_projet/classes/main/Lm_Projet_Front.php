@@ -7,11 +7,18 @@ class Lm_Projet_Front
     {
 
         add_action('wp_enqueue_scripts', array($this, 'addjs'), 0);
-        add_action('init', array($this, 'declare_route'), 0);
-        add_filter('query_vars', array($this, 'ajout_var_custom'));
-        add_action('wp_loaded', array($this, 'prend_en_compte'));
         return;
+    }
 
+    public function addjs() {
+
+        wp_enqueue_script('lm_projet', plugins_url( LM_PROJET_PLUGIN_NAME .'/assets/js/Lm_Projet_Front.js'), array('jquery-new'), LM_PROJET_VERSION, true);
+        wp_localize_script('lm_projet', 'lmprojetscript', array(
+            'ajax_url' => admin_url('admin-ajax.php'),
+            'security' => wp_create_nonce('ajax_nonce_security')
+        ));
+
+        return;
 
     }
 }

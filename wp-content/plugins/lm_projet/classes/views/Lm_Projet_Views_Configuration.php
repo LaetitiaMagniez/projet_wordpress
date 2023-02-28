@@ -4,7 +4,7 @@ class Lm_Projet_Views_Configuration
 {
     public function display(){
 
-        $configs = Lm_Projet_Crud_Index::getCountriesNames();
+        $configs = Lm_Projet_Crud_Index::getCountriesInformations();
 
         ?>
 
@@ -14,16 +14,15 @@ class Lm_Projet_Views_Configuration
             <div class="notice notice-info notice-alt is-dismissible hide update-message">
                 <p><?php _e('Successfully updated!'); ?></p>
             </div>
-            <form action="#">
-                <label for="cars">Choisissez les pays qui doivent être disponibles: </label>
-                <select name="cars" id="cars" multiple>
+            <form method="get" action="#">
+                <label for="countries">Choisissez les pays qui doivent être disponibles: </label>
+                <select name="countries" id="countries" multiple>
                     <?php foreach ($configs as $config): ?>
-                    <option value="<?php print $config['pays'] ?>" id="lm_projet_disponible"><?php print $config['pays'] ?></option>
+                    <option value="<?php print $config['pays'] ?>" id="<?php print $config['id'] ?>"><?php print $config['pays'] ?></option>
                     <?php endforeach ?>
                 </select>
             </form>
             <button class="button button-primary left update" id="updateButton">
-                <i class="fas fa-check"></i>
                 <?php _e('Update'); ?>
             </button>
         </div>

@@ -6,7 +6,7 @@ class Lm_Projet_Install {
 
         global $wpdb;
 
-        $sql = 'SHOW TABLES LIKE \'%'. $wpdb->prefix . LM_PROJET_BASENAME. '_countries%\'';
+        $sql = 'SHOW TABLES LIKE \'%'. $wpdb->prefix . LM_PROJET_BASENAME. '_prospectsdata%\'';
         return $wpdb->get_var($sql);
 
     }
@@ -48,24 +48,24 @@ class Lm_Projet_Install {
             'Aruba'	=>	'ABW',
             'Australie'	=>	'AUS',
             'Autriche'	=>	'AUT',
-            'Azerbaïdjan' =>'AZE',
+            'Azerbaïdjan' => 'AZE',
             'Bahamas'	=>	'BHS',
             'Bahreïn'	=> 'BHR',
             'Bangladesh' =>	'BGD',
-            'Barbade' =>	'BRB',
+            'Barbade' => 'BRB',
             'Biélorussie'=>	'BLR',
             'Belgique'	=>	'BEL',
             'Belize'	=>	'BLZ',
             'Bénin'	=>	'BEN',
-            'Bermudes'	=>	'BMU',
-            'Bhoutan'	=>	'BTN',
-            'Bolivie' =>	'BOL',
+            'Bermudes'	=> 'BMU',
+            'Bhoutan'	=> 'BTN',
+            'Bolivie' => 'BOL',
             'Bosnie-Herzégovine' =>	'BIH',
-            'Botswana'	=>	'BWA',
+            'Botswana'	=> 'BWA',
             'Île Bouvet' =>	'BVT',
             'Brésil' =>	'BRA',
             'British Virgin Islands' =>	'VGB',
-            'Territoire britannique de l’Océan Indien' =>	'IOT',
+            'Territoire britannique de l’Océan Indien' => 'IOT',
             'Brunei Darussalam' =>		'BRN',
             'Bulgarie'	=>	'BGR',
             'Burkina Faso'	=> 'BFA',
@@ -281,12 +281,36 @@ class Lm_Projet_Install {
             'Zambie'	=>	'ZMB',
             'Zimbabwe'	=>	'ZWE',
             );
-        
+
         if(dbDelta($sql_countries)){
 
+            $sql_prospects = '
+                CREATE TABLE IF NOT EXISTS `'. $wpdb->prefix . LM_PROJET_BASENAME . '_prospects` (
+                `id` INT(11) AUTO_INCREMENT NOT NULL,
+                `dateInscription` DATETIME DEFAULT NOW() NOT NULL,
+                PRIMARY KEY (`id`)
+            ) ENGINE=InnoDB '. $charset_collate;
+
+        }
+        if(dbDelta($sql_prospects)){
+
+            $sql_prospectsdata = '
+                CREATE TABLE IF NOT EXISTS `'. $wpdb->prefix . LM_PROJET_BASENAME . '_prospectsdata` (
+               `index` INT(11) AUTO_INCREMENT NOT NULL,
+                    `valeur` VARCHAR(255) NOT NULL,
+                    `cle` VARCHAR(255) NOT NULL,
+                    `id` INT(11) NOT NULL,
+                    PRIMARY KEY (`index`),
+                    FOREIGN KEY (`id`) REFERENCES `'. $wpdb->prefix . LM_PROJET_BASENAME . '_prospects`(id)
+                ) ENGINE=InnoDB '. $charset_collate;
+
+        }
+
+        if(dbDelta($sql_prospectsdata)){
             foreach ($pays as $key => $value){
                 $wpdb->insert($wpdb->prefix . LM_PROJET_BASENAME . '_countries' , array('pays'=> $key, 'code_ISO'=> $value) );
             }
         }
+
     }
 }

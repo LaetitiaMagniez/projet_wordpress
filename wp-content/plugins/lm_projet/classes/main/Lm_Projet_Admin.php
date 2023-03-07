@@ -60,7 +60,7 @@ class Lm_Projet_Admin
         wp_register_script('lm_projet_admin', plugins_url( LM_PROJET_PLUGIN_NAME .'/assets/js/Lm_Projet_Admin.js'), array(), LM_PROJET_VERSION, true);
         wp_enqueue_script('lm_projet_admin');
 
-        wp_localize_script('lmp_projet_admin', 'lmprojetscript', array(
+        wp_localize_script('lm_projet_admin', 'lmprojetscript', array(
             'security' => wp_create_nonce('ajax_nonce_security')
         ));
 

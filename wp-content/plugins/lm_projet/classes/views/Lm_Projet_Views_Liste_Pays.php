@@ -14,7 +14,7 @@ class Lm_Projet_Views_Liste_Pays
         <h1 class="wp-heading-inline"><?php print get_admin_page_title(); ?></h1>
         <hr class="wp-header-end" />
         <div class="notice notice-info notice-alt is-dismissible hide delete-confirmation">
-            <p><?php _e('Updated done!'); ?></p>
+            <p><?php _e('Mise à jour effectuée avec succès !'); ?></p>
         </div>
 <!--        --><?php //self::toolbar(); ?>
         <div class="wrap" id="list-table">

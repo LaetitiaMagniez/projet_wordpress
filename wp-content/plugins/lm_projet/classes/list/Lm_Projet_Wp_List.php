@@ -49,20 +49,6 @@ class Lm_Projet_Wp_List extends WP_List_Table
 
     public function get_columns($columns = array()) {
 
-
-        $note = '<form action="#">
-                        <select name="cars" id="cars">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                </form>         ';
-
-        $accessible = '<input type="checkbox" id="accessible" name="accessible" >';
-
         $columns['pays'] = __('pays');
         $columns['code_ISO'] = __('code ISO');
         $columns['note'] = __('note');
@@ -100,7 +86,7 @@ class Lm_Projet_Wp_List extends WP_List_Table
 
         global $wpdb;
 
-        $sql = "SELECT `pays`,`code_ISO` FROM " . $wpdb->prefix . LM_PROJET_BASENAME . '_countries' ;
+        $sql = "SELECT * FROM " . $wpdb->prefix . LM_PROJET_BASENAME . '_countries' ;
 
 
         if (!empty($_REQUEST['orderby'])) {
@@ -117,10 +103,10 @@ class Lm_Projet_Wp_List extends WP_List_Table
     public function column_default( $item, $column_name ) {
 
         if (preg_match('/note/i',$column_name))
-            return self::getNote($item);
+            return self::getNote($item['id']);
 
         if (preg_match('/accessible/i',$column_name))
-            return self::getAccessibilite($item);
+            return self::getAccessibilite($item['id']);
 
         return @$item[$column_name];
 
@@ -132,7 +118,7 @@ class Lm_Projet_Wp_List extends WP_List_Table
             return;
 
         return  sprintf(
-            '<select data-id="%d" class="note">
+            '<select data-id="%d" class="note_country">
                             <option value="0">0</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -151,7 +137,7 @@ class Lm_Projet_Wp_List extends WP_List_Table
             return;
 
         return  sprintf(
-            '<input type="checkbox" data-id="%d" class="accessible">',
+            '<input type="checkbox" data-id="%d" class="accessible_majeur"> ',
             $id,
             __('accessible')
         );

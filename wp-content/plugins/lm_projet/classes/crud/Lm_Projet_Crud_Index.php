@@ -7,32 +7,69 @@ class Lm_Projet_Crud_Index
 
         global $wpdb;
 
-        $sql = "SELECT `pays`, `id` FROM ". $wpdb->prefix . LM_PROJET_BASENAME . '_countries';
+        $sql = "SELECT * FROM ". $wpdb->prefix . LM_PROJET_BASENAME . '_countries';
         $countriesInformations = $wpdb->get_results($sql,'ARRAY_A');
 
         return $countriesInformations;
 
     }
 
-    static public function update_disponibility($id, $value){
+    static public function update_disponibility($idDisponible ){
 
-        if(!$id && !$value)
-            return false;
+        if (!$idDisponible)
+            return;
+
 
         global $wpdb;
 
-        return $wpdb->update($wpdb->prefix . LM_PROJET_BASENAME . '_countries',['disponible' => $value], ['id'=> $id]);
+        $table_name_config = $wpdb->prefix . LM_PROJET_BASENAME . '_countries';
+
+        $Pays_non_disponibleSql = "SELECT `id` FROM $table_name_config";
+        $Pays_non_disponible = $wpdb->get_results($Pays_non_disponibleSql, 'ARRAY_A');
+
+
+        if ($Pays_non_disponible)
+            foreach ($Pays_non_disponible as $value)
+                if($value !==$idDisponible)
+                $wpdb->update($table_name_config, array('disponible' => 0), array('id' => $value['id']));
+
+        foreach ($idDisponible as $id)
+            $wpdb->update($table_name_config, array('disponible' => 1), array('id' => $id));
+
+        return "Mise à jour effectuée avec succès !";
+
 
     }
 
-    static public function update_accessibility($id, $value){
+    static public function update_accessibility($updateAccess, $valueAccess){
 
-        if(!$id && !$value)
-            return false;
+        if(!$updateAccess && !$valueAccess)
+            return;
 
         global $wpdb;
 
-        return $wpdb->update($wpdb->prefix . LM_PROJET_BASENAME . '_countries',['accessible' => $value], ['id'=> $id]);
+        $table_name_config = $wpdb->prefix . LM_PROJET_BASENAME . '_countries';
+
+        if($updateAccess)
+            $wpdb->update($table_name_config, array('accessible_majeur_uniquement' => $valueAccess), array('id' => $updateAccess));
+
+        return "Mise à jour effectuée avec succès !";
+
+    }
+
+    public function update_note($idNote, $valueNote){
+
+        if(!$idNote && !$valueNote)
+            return;
+
+        global $wpdb;
+
+        $table_name = $wpdb->prefix . LM_PROJET_BASENAME . '_countries';
+
+        if($idNote && $valueNote)
+            $wpdb->update($table_name , array('note' => $valueNote), array('id' => $idNote));
+
+        return "Mise à jour effectuée avec succès !";
 
     }
 

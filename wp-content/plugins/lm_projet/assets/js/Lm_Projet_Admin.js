@@ -1,51 +1,92 @@
 jQuery( document ).ready(function() {
 
-    jQuery('.updateButton').on('click', function (e) {
-        //stoppe les events par défaut
+    jQuery("#updateButton").click(function (e)
+    {
         e.stopPropagation();
         e.preventDefault();
 
-        var _this = jQuery(this);
-
-        let data = {
-            'action': 'changeDisponibility',
-            'security': lmprojetscript.security
-        };
-
-        jQuery.post(ajaxurl, data, function (rs) {
-            alert('coucou');
-            return false;
-        })
-    });
-
-    jQuery(".acessible").on('click',function (e) {
-        e.stopPropagation();
-        e.preventDefault();
-
-        var _this = jQuery(this);
-
-        let data;
-
-        if (this.checked)
-            data = {
-                action: "changeAccess",
-                security: lmprojetscript.security
-            };
-        else
-            data = {
-                action: "change_access",
+        const datas =
+            {
+                action: "changeDisponibility",
                 security: lmprojetscript.security,
-                iso: jQuery(this).data("id"),
-                majeur: 0,
+                idDisponible: jQuery("#countries").val(),
             };
 
-        jQuery.post(ajaxurl, datas, function (rs) {
+        jQuery.post(ajaxurl, datas, function (rs)
+        {
             jQuery(".is-dismissible").show("slow");
 
             setTimeout(() => {
                 jQuery(".is-dismissible").hide("slow");
-            }, "1000");
+            }, "4500");
             return false;
-        })
-    });
+        });
+    })
+
+    jQuery(".accessible_majeur").change(function (e)
+    {
+        e.stopPropagation();
+        e.preventDefault();
+
+        var _this = jQuery(this);
+        let datas;
+
+        if(this.checked)
+            datas =
+            {
+                'action': "changeAccess",
+                'security': lmprojetscript.security,
+                'updateAccess':  jQuery(this).data('id'),
+                'valueAccess' : 1
+            };
+        else if(!(this.checked))
+            datas =
+                {
+                    'action': "changeAccess",
+                    'security': lmprojetscript.security,
+                    'updateAccess':  jQuery(this).data('id'),
+                    'valueAccess' : 0
+                };
+
+
+        jQuery.post(ajaxurl, datas, function (rs)
+        {
+            jQuery(".is-dismissible").show("slow");
+
+            setTimeout(() => {
+                jQuery(".is-dismissible").hide("slow");
+            }, "4500");
+            return false;
+        });
+    })
+
+    jQuery(".note_country").change(function (e)
+    {
+        e.stopPropagation();
+        e.preventDefault();
+
+        var _this = jQuery(this);
+
+        const datas =
+            {
+                'action': "changeNote",
+                'security': lmprojetscript.security,
+                'idNote':  jQuery(this).data('id'),
+                'valueNote': jQuery(this).val()
+            };
+
+        jQuery.post(ajaxurl, datas, function (rs)
+        {
+            jQuery(".is-dismissible").show("slow");
+
+            setTimeout(() => {
+                jQuery(".is-dismissible").hide("slow");
+            }, "4500");
+            return false;
+        });
+    })
+
+
+
+
 });

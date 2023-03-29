@@ -1,7 +1,7 @@
 <?php
 
-add_action('wp_ajax_lmprojetprospects', array('Lm_Projet_Front_Actions', 'inscription'));
-add_action('wp_ajax_nopriv_lmprojetprospects', array('Lm_Projet_Front_Actions', 'inscription'));
+add_action('wp_ajax_prospectsInscription', array('Lm_Projet_Front_Actions', 'inscription'));
+add_action('wp_ajax_nopriv_prospectsInscription', array('Lm_Projet_Front_Actions', 'inscription'));
 
 class Lm_Projet_Front_Actions {
 

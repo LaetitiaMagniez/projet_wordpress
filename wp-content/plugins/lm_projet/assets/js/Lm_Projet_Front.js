@@ -7,8 +7,8 @@ jQuery( document ).ready(function() {
         e.preventDefault();
 
         let formData = new FormData();
-        formData.append('action', 'lmprojetprospects');
-        formData.append('security', lm_projetscript.security);
+        formData.append('action', 'prospectsInscription');
+        formData.append('security', lmprojetscript.security);
 
         jQuery('#prospect_inscription').find('input, textarea, select').each( function(i){
             var id = jQuery(this).attr('id');

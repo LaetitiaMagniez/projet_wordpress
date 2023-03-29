@@ -8,22 +8,22 @@ class Lm_Projet_Shortcodes_Form {
 
         $atts= '<form id="prospect_inscription">
                 <fieldset>
-                    <legend><?php _e("Your coords") ?></legend>
+                    <legend> Vos informations</legend>
                     <div>
-                        <label for="prenom">Prénom</label>
-                        <input type="text" id="prenom" name="prenom">
-                        <label for="nom">Nom</label>
-                        <input type="text" id="nom" name="nom">
-                        <label for="mail">Mail</label>
-                        <input type="text" id="mail" name="mail">
+                        <label for="prenom">Votre Prénom</label>
+                            <input type="text" id="prenom" name="prenom">
+                        <label for="nom"> Votre Nom</label>
+                            <input type="text" id="nom" name="nom">
+                        <label for="mail">Votre Mail</label>
+                            <input type="text" id="mail" name="mail">
                         <label for="sexe">Sexe</label>
-                        <select name="sexe" id="sexe" required="required">
-                        <option value="Homme">Homme</option>
-                        <option value="Femme">Femme</option>
-                    </select>
+                            <select name="sexe" id="sexe" required="required" style="display: block">
+                                <option value="Homme">Homme</option>
+                                <option value="Femme">Femme</option>
+                            </select>
                         <label for="dateNaissance">Date de Naissance</label>
                         <input type="date" id="dateNaissance" name="dateNaissance">
-                        <button id="btn">Submit</button>
+                        <button id="btn-inscription">Suivant</button>
                     </div>
                 </fieldset>
             </form>';

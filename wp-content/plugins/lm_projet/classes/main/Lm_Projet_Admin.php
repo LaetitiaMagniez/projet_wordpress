@@ -81,6 +81,7 @@ class Lm_Projet_Admin
     }
 
     public function lm_projet_prospects(){
-        print('test');
+        $Lm_Projet_Views_Prospects= new Lm_Projet_Views_Prospects();
+        return $Lm_Projet_Views_Prospects->display();
     }
 }

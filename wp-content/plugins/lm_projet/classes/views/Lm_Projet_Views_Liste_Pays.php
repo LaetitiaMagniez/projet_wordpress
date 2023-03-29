@@ -16,7 +16,7 @@ class Lm_Projet_Views_Liste_Pays
         <div class="notice notice-info notice-alt is-dismissible hide delete-confirmation">
             <p><?php _e('Mise à jour effectuée avec succès !'); ?></p>
         </div>
-<!--        --><?php //self::toolbar(); ?>
+          <?php self::toolbar(); ?>
         <div class="wrap" id="list-table">
             <form id="list-table-form" method="post">
                 <?php
@@ -31,6 +31,34 @@ class Lm_Projet_Views_Liste_Pays
         </div>
         <div>
         <?php
+
+    }
+
+    private function toolbar()
+    {
+
+        ?>
+
+        <div>
+            <form action="<?php print admin_url('admin-post.php'); ?>" method="post">
+            <table>
+                <tbody>
+                    <tr>
+                        <?php if(defined('LM_PROJET_PLUGIN_NAME')) : ?>
+                        <td>
+                            <a class="button btn-secondary" href ="<?php print plugins_url(LM_PROJET_PLUGIN_NAME .
+                            '/classes/export/Lm_Projet_Export_Pays_XML.php'); ?>">
+                                <i class="fas fa-save"></i> XML
+                            </a>
+                        </td>
+                        <?php endif; ?>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    <hr class="wp-header-end" />
+
+    <?php
 
     }
 }

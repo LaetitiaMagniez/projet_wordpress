@@ -31,7 +31,8 @@ jQuery( document ).ready(function() {
             success: function(rs, textStatus, jqXHR) {
                     //aller à la page suivante
                     window.sessionStorage.setItem("Authorisation", "step1,step2");
-                    window.location.replace("http://localhost/wordpress/2023/03/27/choix-de-pays/");
+                // on utilise le chemin de l'article créé avec le shortcode [CHOIX_PAYS]
+                window.location.replace("http://localhost/wordpress/2023/03/27/choix-de-pays/?id="+rs);
                     //return false;
                 },
             });
@@ -64,9 +65,13 @@ jQuery( document ).ready(function() {
                 let id = jQuery(this).attr("id");
                 if (typeof id !== "undefined") formData.append(id, jQuery(this).val());
             });
+            var userid = window.location.href.slice(window.location.href.indexOf('=')).split('=')[1];
+            formData.append('lastId', userid);
+
+            console.log(userid);
 
 
-            jQuery('#lm-loading-container').show();
+            jQuery('#loading').show();
 
 
 
@@ -83,10 +88,9 @@ jQuery( document ).ready(function() {
                     data: formData,
                     type: "post",
                     success: function (rs, textStatus, jqXHR) {
-
                         window.sessionStorage.setItem("Authorisation", "step1,step2,step3");
-                        window.location.replace("http://localhost/wordpress/2023/03/01/final/");
-
+                        // on utilise le chemin de l'article créé avec le shortcode [FORMULAIRE_FINAL]
+                        window.location.replace("http://localhost/wordpress/2023/04/03/formulaire-final/?id="+userid);
                         return false;
                     },
                 });

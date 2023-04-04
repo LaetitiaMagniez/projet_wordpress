@@ -151,20 +151,16 @@ class Lm_Projet_Crud_Index
         }
     }
 
-    public function insert_paysChoisi($lastId, $cle, $valeur)
+    public function getInfosProspect($idProspect)
     {
         global $wpdb;
 
-        $table_name = $wpdb->prefix . LM_PROJET_BASENAME . '_prospectsdata';
+        $table_prospects = $wpdb->prefix . LM_PROJET_BASENAME . '_prospectsdata';
 
-        $wpdb->insert(
-            $table_name,
-            array(
-                'id' => $lastId,
-                'cle' => $cle,
-                'valeur' => $valeur,
-            )
-        );
+        $sqlProspects= "SELECT `valeur` FROM $table_prospects where `id`= $idProspect " ;
+
+        return $wpdb->get_results($sqlProspects, 'ARRAY_A');
+
 
 
     }

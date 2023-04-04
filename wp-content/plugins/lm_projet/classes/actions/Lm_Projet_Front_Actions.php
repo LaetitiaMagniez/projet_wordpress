@@ -24,7 +24,7 @@ class Lm_Projet_Front_Actions {
             if (!in_array($key, ['action','security']))
                 $Lm_Projet_Crud_Index->ajout_data($lastId, $key, $value);
 
-        print "inscrit";
+        print $lastId;
         exit;
     }
 
@@ -38,19 +38,20 @@ class Lm_Projet_Front_Actions {
         var_dump($_REQUEST);
 
         $Lm_Projet_Crud_Index = new Lm_Projet_Crud_Index();
-
+        $lastId= $_REQUEST['lastId'];
         foreach ($_REQUEST as $key => $value)
         {
             if (!in_array($key, array('action', 'security')))
             {
                 if($value != "Veuillez sélectionner un pays")
                 {
-                    $Lm_Projet_Crud_Index->insert_paysChoisi($lastId, $key, $value);
+                    $Lm_Projet_Crud_Index->ajout_data($lastId,$key, $value);
 
                 }
             }
         }
 
+        print $lastId;
 
         exit;
     }

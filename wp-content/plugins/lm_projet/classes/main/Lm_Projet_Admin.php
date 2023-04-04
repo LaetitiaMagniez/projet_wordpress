@@ -55,7 +55,7 @@ class Lm_Projet_Admin
 
     public function assets(){
 
-        //wp_enqueue_style('admin_enqueue_scripts', plugins_url(LM_PROJET_PLUGIN_NAME.'/assets/css/stylesheet.css'));
+        wp_enqueue_style('admin_enqueue_scripts', plugins_url(LM_PROJET_PLUGIN_NAME .'/assets/css/Lm_Projet_Admin.css'));
 
         wp_register_script('lm_projet_admin', plugins_url( LM_PROJET_PLUGIN_NAME .'/assets/js/Lm_Projet_Admin.js'), array(), LM_PROJET_VERSION, true);
         wp_enqueue_script('lm_projet_admin');

@@ -143,5 +143,12 @@ class Lm_Projet_Wp_List extends WP_List_Table
         );
     }
 
+    public function single_row($item)
+    {
+        $cssClass = ($item['disponible'] == 1) ? '' : 'lm_grid_disable_row';
+        echo '<tr class="' . $cssClass . '">';
+        $this->single_row_columns($item);
+        echo '</tr>';
+    }
 
 }

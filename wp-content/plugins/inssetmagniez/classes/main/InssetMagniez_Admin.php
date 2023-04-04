@@ -39,7 +39,7 @@ class InssetMagniez_Admin {
             array($this, 'inssetmagniez_inscrits')
         );
 
-        add_action('admin_enqueue_scripts', array($this, 'assets'), 999);
+        //add_action('admin_enqueue_scripts', array($this, 'assets'), 999);
     }
 
     public function assets(){

@@ -99,4 +99,73 @@ class Lm_Projet_Crud_Index
         );
 
     }
+
+
+    public static function getAge()
+    {
+
+        function last($array) {
+
+            if (!is_array($array)) return $array;
+
+            if (!count($array)) return null;
+
+            end($array);
+
+            return $array[key($array)];
+
+        }
+        global $wpdb;
+        $table_prospects = $wpdb->prefix . LM_PROJET_BASENAME . '_prospectsdata';
+
+        $sqlnbrProspects= "SELECT DISTINCT `id` FROM $table_prospects ";
+        $nbrProspects= $wpdb->get_results($sqlnbrProspects, 'ARRAY_A');
+        $lastId= last($nbrProspects);
+        $lastIdValue= implode($lastId);
+
+
+        $sqlAge = "SELECT `valeur` FROM $table_prospects WHERE `id`=$lastIdValue AND `cle`='dateNaissance'";
+        $prospect = $wpdb->get_results($sqlAge, 'ARRAY_A');
+
+        $dateNaissance = $prospect['0']['valeur'];
+        $dateActuelle = date("Y-m-d");
+        $dateDiff = date_diff(date_create($dateNaissance), date_create($dateActuelle));
+        $age = $dateDiff->format('%y');
+
+        if ($age >= 18) {
+            // le prospect est majeur
+            $table_pays= $wpdb->prefix . LM_PROJET_BASENAME . '_countries';
+
+            $sql = "SELECT * FROM $table_pays WHERE `disponible`=1 ";
+
+            return $wpdb->get_results($sql, 'ARRAY_A');
+
+        } else {
+
+            // le prospect est mineur
+            $table_pays = $wpdb->prefix . LM_PROJET_BASENAME . '_countries';
+
+            $sql = "SELECT * FROM $table_pays WHERE `disponible`=1 AND `accessible_majeur_uniquement`=0";
+
+            return $wpdb->get_results($sql, 'ARRAY_A');
+        }
+    }
+
+    public function insert_paysChoisi($lastId, $cle, $valeur)
+    {
+        global $wpdb;
+
+        $table_name = $wpdb->prefix . LM_PROJET_BASENAME . '_prospectsdata';
+
+        $wpdb->insert(
+            $table_name,
+            array(
+                'id' => $lastId,
+                'cle' => $cle,
+                'valeur' => $valeur,
+            )
+        );
+
+
+    }
 }
